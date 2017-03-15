@@ -7,7 +7,6 @@ var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var express = require('express');
 var router = express.Router();
-var oam = require('./oam');
 
 var data;
 var insertDocuments;
@@ -34,7 +33,7 @@ var Schema_dirver = new Schema({
 	license:String,
 	enterprise_uni_code:String,
 	status: Number,
-	reg_time:Data,
+	reg_time:Date,
 	last_login : Date
 }, {
 	versionKey : false
@@ -126,68 +125,129 @@ mongoose.model("drvier", Schema_dirver);
 mongoose.model("shipper", Schema_shipper);
 mongoose.model("order", Schema_order);
 
-router.create_driver = function() {
+router.create_driver = function(vid,
+		vname,
+		vchina_id,
+		vphone,
+		vlicense,
+		venterprise_uni_code,
+		vstatus,
+		vreg_time,
+		vlast_login) {
 	var adriver = new Schema_dirver({
-		name : "sam976",
-		id : 123,
-		phone : "18706888888",
-		date : Date.now()
+		id : vid,
+		name : vname,
+		china_id:vchina_id,
+		phone : vphone,
+		license:vlicense,
+		enterprise_uni_code:venterprise_uni_code,
+		status: vstatus,
+		reg_time:vreg_time,
+		last_login : vlast_login//Date.now()
 	});
 	adriver.save(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		db.close();
 	});
-}
+};
 
-router.create_shipper = function() {
+router.create_shipper = function(vid,
+		vname,
+		vchina_id,
+		vphone ,
+		venterprise_uni_code,
+		vreg_time,
+		vlast_login) {
 	var adriver = new Schema_shipper({
-		name : "sam976",
-		id : 123,
-		phone : "18706888888",
-		date : Date.now()
+		id : vid,
+		name : vname,
+		china_id : vchina_id,
+		phone : vphone,
+		enterprise_uni_code:venterprise_uni_code,
+		reg_time:vreg_time,
+		last_login : vlast_login
 	});
 	adriver.save(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		db.close();
 	});
-}
+};
 
-router.create_order = function() {
+router.create_order = function(vid,
+		vname ,
+		venterprise_id,
+		vdriver_id,
+		vtruck_id,
+		vstatus,
+		vdesc,
+		vgen_pic_url,
+		vaccept_order_pic_url,
+		vdeliver_pic_url,
+		varrived_pic_url,
+		vaccept_delivery_pic_url,
+		vlast_op) {
 	var adriver = new Schema_order({
-		name : "sam976",
-		id : 123,
-		phone : "18706888888",
-		date : Date.now()
+		id : vid,
+		name : vname,
+		enterprise_id:venterprise_id,
+		driver_id:vdriver_id,
+		truck_id:vtruck_id,
+		status:vstatus,
+		desc:vdesc,
+		gen_pic_url:vgen_pic_url,
+		accept_order_pic_url:vaccept_order_pic_url,
+		deliver_pic_url:vdeliver_pic_url,
+		arrived_pic_url:varrived_pic_url,
+		accept_delivery_pic_url:vaccept_delivery_pic_url,
+		last_op : vlast_op
 	});
 	adriver.save(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		db.close();
 	});
-}
+};
 
-router.update_driver = function() {
+router.update_driver = function(vid, vstatus) {
 	Schema_dirver.update({
-		name : "sam976"
+		id : vid
 	}, {
-		id : 456,
-		phone : "12345678910"
-	}, function(error) {
+		status : vstatus
+	}, function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		db.close();
 	});
-}
+};
 
-router.update_shipper = function() {
+router.update_order = function(vid, vstatus) {
 	Schema_dirver.update({
-		name : "sam976"
+		id : vid
 	}, {
-		id : 456,
-		phone : "12345678910"
-	}, function(error) {
+		status : vstatus
+	}, function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		db.close();
 	});
-}
-
-router.update_order = function() {
-	Schema_dirver.update({
-		name : "sam976"
-	}, {
-		id : 456,
-		phone : "12345678910"
-	}, function(error) {
-	});
-}
+};
 
 /*
  * router.dbConn = function(tableName) { console.log("table:-"+tableName); var

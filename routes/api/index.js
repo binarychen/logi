@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('db');
+var db = require('./db');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,7 +18,7 @@ router.get('/create_order', function(req, res, next) {
 router.post('/create_order', function(req, res, next) {
 	if(req.body){
 		console.log(req.body);
-		
+
 	}else{
 		res.send("test create_order");
 	}

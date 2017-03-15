@@ -145,7 +145,7 @@ router.create_driver = function(vid,
 		reg_time:vreg_time,
 		last_login : vlast_login//Date.now()
 	});
-	adriver.save(function(err) {
+	adriver.create(function(err) {
 		if(err){
 		    console.log(err);
 		  }else{
@@ -171,7 +171,7 @@ router.create_shipper = function(vid,
 		reg_time:vreg_time,
 		last_login : vlast_login
 	});
-	adriver.save(function(err) {
+	adriver.create(function(err) {
 		if(err){
 		    console.log(err);
 		  }else{
@@ -209,7 +209,7 @@ router.create_order = function(vid,
 		accept_delivery_pic_url:vaccept_delivery_pic_url,
 		last_op : vlast_op
 	});
-	adriver.save(function(err) {
+	adriver.create(function(err) {
 		if(err){
 		    console.log(err);
 		  }else{

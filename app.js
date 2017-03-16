@@ -12,6 +12,9 @@ var apis = require('./routes/api/index');
 var driver = require('./routes/api/driver');
 var shipper = require('./routes/api/shipper');
 var order = require('./routes/api/order');
+var cargo = require('./routes/api/cargo');
+var enterprise = require('./routes/api/enterprise');
+var truck = require('./routes/api/truck');
 
 var app = express();
 
@@ -35,6 +38,9 @@ app.use('/api', apis);
 app.use('/driver', driver);
 app.use('/shipper', shipper);
 app.use('/order', order);
+app.use('/cargo', cargo);
+app.use('/enterprise', enterprise);
+app.use('/truck', truck);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

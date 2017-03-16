@@ -26,7 +26,7 @@ router.post('/create_shipper', function(req, res, next) {
 	}
 });
 
-/* POST update a logistic shipper. */
+/* POST update a logistic shipper. * /
 router.post('/update_shipper', function(req, res, next) {
 	if(req.body){
 		console.log(req.body);

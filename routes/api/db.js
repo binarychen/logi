@@ -148,6 +148,7 @@ router.create_driver = function(vid, vname, vchina_id, vphone, vlicense,
 		last_login : vlast_login
 	// Date.now()
 	});
+//<<<<<<< HEAD
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -155,6 +156,17 @@ router.create_driver = function(vid, vname, vchina_id, vphone, vlicense,
 			console.log('success');
 		}
 		// db.close();
+		/*
+=======
+	adriver.create(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		//db.close();
+>>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
+*/
 	});
 };
 
@@ -169,6 +181,7 @@ router.create_shipper = function(vid, vname, vchina_id, vphone,
 		reg_time : vreg_time,
 		last_login : vlast_login
 	});
+//<<<<<<< HEAD
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -176,6 +189,17 @@ router.create_shipper = function(vid, vname, vchina_id, vphone,
 			console.log('success');
 		}
 		// db.close();
+		/*
+=======
+	adriver.create(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		//db.close();
+>>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
+*/
 	});
 };
 
@@ -202,6 +226,7 @@ router.create_order = function(vid, vname, venterprise_id, vdriver_id,
 		accept_delivery_pic_url : vaccept_delivery_pic_url,
 		last_op : vlast_op
 	});
+//<<<<<<< HEAD
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -292,6 +317,17 @@ router.create_truck = function(vid, vvin, vlicense_plate, vname, vdriver_id,
 			console.log('success');
 		}
 		// db.close();
+		/*
+=======
+	adriver.create(function(err) {
+		if(err){
+		    console.log(err);
+		  }else{
+		    console.log('success');
+		  }
+		//db.close();
+>>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
+*/
 	});
 };
 

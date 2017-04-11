@@ -34,14 +34,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/api', apis);
+/*app.use('/api', apis);
 app.use('/driver', driver);
 app.use('/shipper', shipper);
 app.use('/order', order);
 app.use('/cargo', cargo);
 app.use('/enterprise', enterprise);
 app.use('/truck', truck);
-
+*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

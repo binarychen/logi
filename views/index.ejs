@@ -3,9 +3,87 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=DI3BZ-QANWI-UGHGU-5TSAG-SFMSJ-TUBNV&libraries=drawing,geometry,autocomplete,convertor"></script>
+	<script>
+		window.onload = function(){
+			var x=document.getElementById("info");
+			function init() {
+			
+				if (navigator.geolocation)
+			    {
+			    	navigator.geolocation.getCurrentPosition(showMap, showError);
+			    }
+			  	else
+			  	{
+			  		x.innerHTML="Geolocation is not supported by this browser.";
+			  	}
+			  	
+		        
+		    }
+		    
+		    function showMap(position){
+		    	//定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+		         var map = new qq.maps.Map(document.getElementById("container"), {
+		            //center: new qq.maps.LatLng(39.916527,116.397128),      
+		            center: new qq.maps.LatLng(position.coords.latitude,
+		            						   position.coords.longitude),
+		            zoom:12                                                 
+		        });
+		        
+		        var circle = new qq.maps.Circle({
+		        	center: center,
+		        	clickable: true,
+		        	cursor: 'pointer',
+		        	fillColor: "#f00",
+		        	map: map,
+		        	radius: 200,
+		        	strokeColor: "#fff",
+		        	strokeDashStyle: "dash",
+		        	strokeWeight: 5,
+		        	visible: true,
+		        	zIndex: 1000
+		        });
+		    }
+		    
+		    function showError(error)
+			{
+			  switch(error.code)
+			    {
+			    case error.PERMISSION_DENIED:
+			      x.innerHTML="User denied the request for Geolocation."
+			      break;
+			    case error.POSITION_UNAVAILABLE:
+			      x.innerHTML="Location information is unavailable."
+			      break;
+			    case error.TIMEOUT:
+			      x.innerHTML="The request to get user location timed out."
+			      break;
+			    case error.UNKNOWN_ERROR:
+			      x.innerHTML="An unknown error occurred."
+			      break;
+			    }
+			}
+		
+		    //调用初始化函数地图
+		    init();
+		}
+		/*
+		var init = function() {
+		    var map = new qq.maps.Map(document.getElementById("container"),{
+		        center: new qq.maps.LatLng(39.916527,116.397128),
+		        zoom: 4
+		    });
+		    //自动缩放每隔2秒执行一次
+		    setInterval(function() {
+		        map.zoomTo((map.getZoom() + 1) % 17);
+		    }, 2000);
+		}*/
+	</script>
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p id = "info" >Welcome to <%= title %></p>
+    <div id="container" style="width:500px; height:300px"></div>
   </body>
 </html>

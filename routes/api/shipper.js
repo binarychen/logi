@@ -26,6 +26,11 @@ router.post('/create_shipper', function(req, res, next) {
 	}
 });
 
+
+/* POST update a logistic shipper. */
+router.post('/update_shipper', function(req, res, next) {
+res.send("test update_shipper");
+
 /* POST update a logistic shipper. * /
 router.post('/update_shipper', function(req, res, next) {
 	if(req.body){
@@ -35,6 +40,7 @@ router.post('/update_shipper', function(req, res, next) {
 	}else{
 		res.send("test update_shipper");
 	}
+>>>>>>> a75b4fe7591d0b31f5465ded831cd6072d6e5fc2
 });
 
 /* POST query a logistic shipper. */

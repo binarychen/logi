@@ -8,8 +8,7 @@
 	<script>
 		window.onload = function(){
 			var x=document.getElementById("info");
-			function init() {
-			
+			function init() {			
 				if (navigator.geolocation)
 			    {
 			    	navigator.geolocation.getCurrentPosition(showMap, showError);
@@ -18,8 +17,6 @@
 			  	{
 			  		x.innerHTML="Geolocation is not supported by this browser.";
 			  	}
-			  	
-		        
 		    }
 		    
 		    function showMap(position){

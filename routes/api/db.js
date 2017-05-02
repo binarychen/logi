@@ -14,7 +14,7 @@ var findDocuments;
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
-var db = mongoose.connect('mongodb://test2:test2@123.206.192.28:27017/logi');
+var db = mongoose.connect('mongodb://test2:testTest2@123.206.192.28:27017/logi');
 var Schema = mongoose.Schema;
 
 db.connection.on("error", function(error) {
@@ -25,6 +25,19 @@ db.connection.once("open", function() {
 	console.log("数据库连接成功");
 });
 
+module.exports = {
+	user : {
+		name : {
+			type : String,
+			required : true
+		},
+		password : {
+			type : String,
+			required : true
+		}
+	}
+};
+
 var Schema_dirver = new Schema({
 	id : Number,
 	name : String,
@@ -33,6 +46,8 @@ var Schema_dirver = new Schema({
 	license : String,
 	enterprise_uni_code : String,
 	status : Number,
+	china_id_screen_url : String,
+	license_screen_url : String,
 	reg_time : Date,
 	last_login : Date
 }, {
@@ -53,8 +68,10 @@ var Schema_shipper = new Schema({
 
 var Schema_shipper_enterprise = new Schema({
 	id : Number,
-	name: String,
+	name : String,
 	enterprise_uni_code : String,
+	business_license_code : String,
+	business_license_screen_url : String,
 	shipper_id : Number,
 	op_range : String,
 	last_order : Date
@@ -65,6 +82,12 @@ var Schema_shipper_enterprise = new Schema({
 var Schema_order = new Schema({
 	id : Number,
 	name : String,
+	order_time : String,
+	receiver_name : String,
+	receiver_address : String,
+	receiver_mobile : String,
+	shipper_id : Number,
+	cargo_id : Number,
 	enterprise_id : Number,
 	driver_id : Number,
 	truck_id : Number,
@@ -72,7 +95,7 @@ var Schema_order = new Schema({
 	from_longitude : Number,
 	to_latitude : Number,
 	to_longitude : Number,
-	status : Number,
+	status : Number, // 取消订单，已下单，已接单，已装车，已收货，完成订单
 	desc : String,
 	gen_pic_url : String,
 	accept_order_pic_url : String,
@@ -80,6 +103,7 @@ var Schema_order = new Schema({
 	arrived_pic_url : String,
 	accept_delivery_pic_url : String,
 	last_op : Date
+// order create time
 }, {
 	versionKey : false
 });
@@ -126,6 +150,39 @@ var Schema_truck = new Schema({
 	versionKey : false
 });
 
+var Schema_truck_media = new Schema({
+	id : Number,
+	vid : Number,
+	type : Number, // 0：图片；1：视频
+	file_name : String,
+	file_url : String,
+	show_order : Number
+}, {
+	versionKey : false
+});
+
+var Schema_cargo_media = new Schema({
+	id : Number,
+	cargo_id : Number,
+	type : Number, // 0：图片；1：视频
+	file_name : String,
+	file_url : String,
+	show_order : Number
+}, {
+	versionKey : false
+});
+
+var Schema_order_media = new Schema({
+	id : Number,
+	order_id : Number,
+	type : Number, // 0：图片；1：视频
+	file_name : String,
+	file_url : String,
+	show_order : Number
+}, {
+	versionKey : false
+});
+
 var Model_dirver = db.model("drvier", Schema_dirver);
 var Model_shipper = db.model("shipper", Schema_shipper);
 var Model_order = db.model("order", Schema_order);
@@ -133,9 +190,13 @@ var Model_cargo = db.model("cargo", Schema_cargo);
 var Model_shipper_enterprise = db
 		.model("enterprise", Schema_shipper_enterprise);
 var Model_truck = db.model("truck", Schema_truck);
+var Model_truck_media = db.model("truck_media", Schema_truck_media);
+var Model_cargo_media = db.model("cargo_media", Schema_cargo_media);
+var Model_order_media = db.model("order_media", Schema_order_media);
 
 router.create_driver = function(vid, vname, vchina_id, vphone, vlicense,
-		venterprise_uni_code, vstatus, vreg_time, vlast_login) {
+		venterprise_uni_code, vstatus, vchina_id_screen_url,
+		vlicense_screen_url, vreg_time, vlast_login) {
 	var adriver = new Model_dirver({
 		id : vid,
 		name : vname,
@@ -144,72 +205,59 @@ router.create_driver = function(vid, vname, vchina_id, vphone, vlicense,
 		license : vlicense,
 		enterprise_uni_code : venterprise_uni_code,
 		status : vstatus,
+		china_id_screen_url : vchina_id_screen_url,
+		license_screen_url : vlicense_screen_url,
 		reg_time : vreg_time,
 		last_login : vlast_login
 	// Date.now()
 	});
-//<<<<<<< HEAD
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log('success');
 		}
-		// db.close();
-		/*
-=======
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
->>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
-*/
+
 	});
 };
 
-router.create_shipper = function(vid, vname, vchina_id, vphone,
-		venterprise_uni_code, vreg_time, vlast_login) {
+router.create_shipper = function(vid, vname, vchina_id, vchina_id_screen_url,
+		vphone, venterprise_uni_code, vreg_time, vlast_login) {
 	var adriver = new Model_shipper({
 		id : vid,
 		name : vname,
 		china_id : vchina_id,
+		china_id_screen_url : vchina_id_screen_url,
 		phone : vphone,
 		enterprise_uni_code : venterprise_uni_code,
 		reg_time : vreg_time,
 		last_login : vlast_login
 	});
-//<<<<<<< HEAD
+
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
 		} else {
 			console.log('success');
 		}
-		// db.close();
-		/*
-=======
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
->>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
-*/
 	});
 };
 
-router.create_order = function(vid, vname, venterprise_id, vdriver_id,
-		vtruck_id, vfrom_latitude, vfrom_longitude, vto_latitude,
-		vto_longitude, vstatus, vdesc, vgen_pic_url, vaccept_order_pic_url,
-		vdeliver_pic_url, varrived_pic_url, vaccept_delivery_pic_url, vlast_op) {
+router.create_order = function(vid, vname, vorder_time, vreceiver_name,
+		vreceiver_address, vreceiver_mobile, vshipper_id, vcargo_id,
+		venterprise_id, vdriver_id, vtruck_id, vfrom_latitude, vfrom_longitude,
+		vto_latitude, vto_longitude, vstatus, vdesc, vgen_pic_url,
+		vaccept_order_pic_url, vdeliver_pic_url, varrived_pic_url,
+		vaccept_delivery_pic_url, vlast_op) {
 	var adriver = new Model_order({
 		id : vid,
 		name : vname,
+		order_time : vorder_time,
+		receiver_name : vreceiver_name,
+		receiver_address : vreceiver_address,
+		receiver_mobile : vreceiver_mobile,
+		shipper_id : vshipper_id,
+		cargo_id : vcargo_id,
 		enterprise_id : venterprise_id,
 		driver_id : vdriver_id,
 		truck_id : vtruck_id,
@@ -226,7 +274,6 @@ router.create_order = function(vid, vname, venterprise_id, vdriver_id,
 		accept_delivery_pic_url : vaccept_delivery_pic_url,
 		last_op : vlast_op
 	});
-//<<<<<<< HEAD
 	adriver.save(function(err) {
 		if (err) {
 			console.log(err);
@@ -266,12 +313,15 @@ router.create_cargo = function(vid, vname, venterprise_id, venterprise_erp_id,
 	});
 };
 
-router.create_enterprise = function(vid, vname, venterprise_uni_code, vshipper_id,
+router.create_enterprise = function(vid, vname, venterprise_uni_code,
+		vbusiness_license_code, vbusiness_license_screen_url, vshipper_id,
 		vop_range, vlast_order) {
 	var aenterprise = new Model_shipper_enterprise({
 		id : vid,
 		name : vname,
 		enterprise_uni_code : venterprise_uni_code,
+		business_license_code : vbusiness_license_code,
+		business_license_screen_url : vbusiness_license_screen_url,
 		shipper_id : vshipper_id,
 		op_range : vop_range,
 		last_order : vlast_order
@@ -286,14 +336,17 @@ router.create_enterprise = function(vid, vname, venterprise_uni_code, vshipper_i
 	});
 };
 
-router.create_truck = function(vid, vvin, vlicense_plate, vname, vdriver_id,
-		vself_weight, vbrand, vbear_part_length, vbear_part_width,
-		vbear_part_height, vtype, veval_level, vstatus, vloc_longitude,
+router.create_truck = function(vid, vvin, vlicense_plate, vvehicle_license,
+		vvehicle_license_screen_url, vname, vdriver_id, vself_weight, vbrand,
+		vbear_part_length, vbear_part_width, vbear_part_height, vtype,
+		veval_level, vstatus, vvehicle_thumb_url, vloc_longitude,
 		vloc_latitude, vdesc, vdesc_pic_url, vlast_update) {
 	var atruck = new Model_truck({
 		id : vid,
 		vin : vvin,
 		license_plate : vlicense_plate,
+		vehicle_license : vvehicle_license,
+		vehicle_license_screen_url : vvehicle_license_screen_url,
 		name : vname,
 		driver_id : vdriver_id,
 		self_weight : vself_weight,
@@ -304,6 +357,7 @@ router.create_truck = function(vid, vvin, vlicense_plate, vname, vdriver_id,
 		type : vtype,
 		eval_level : veval_level,
 		status : vstatus,
+		vehicle_thumb_url : vvehicle_thumb_url,
 		loc_longitude : vloc_longitude,
 		loc_latitude : vloc_latitude,
 		desc : vdesc,
@@ -316,18 +370,47 @@ router.create_truck = function(vid, vvin, vlicense_plate, vname, vdriver_id,
 		} else {
 			console.log('success');
 		}
+
+	});
+};
+
+router.create_truck_media = function(vid, vvid, vtype, vfile_name, vfile_url,
+		vshow_order) {
+	var atruck_media = new Model_truck_media({
+		id : vid,
+		vid : vvid,
+		type : vtype, // 0：图片；1：视频
+		file_name : vfile_name,
+		file_url : vfile_url,
+		show_order : vshow_order
+	});
+	atruck_media.save(function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('success');
+		}
 		// db.close();
-		/*
-=======
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
->>>>>>> 8bcb0dab9a622fc6da9efbb6140eab3838e70467
-*/
+	});
+};
+
+router.create_cargo_media = function(vid, vvid, vtype, vfile_name, vfile_url,
+		vshow_order) {
+	var acargo_media = new Model_cargo_media({
+		id : vid,
+		vid : vvid,
+		type : vtype, // 0：图片；1：视频
+		file_name : vfile_name,
+		file_url : vfile_url,
+		show_order : vshow_order
+	});
+	acargo_media.save(function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('success');
+		}
+		// db.close();
 	});
 };
 

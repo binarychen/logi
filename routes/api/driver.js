@@ -19,6 +19,8 @@ router.post('/create_driver', function(req, res, next) {
 				req.body.license,
 				req.body.enterprise_uni_code,
 				req.body.status,
+				req.body.china_id_screen_url,   //v2.0
+				req.body.license_screen_url,	//v2.0
 				Date.now(),
 				Date.now()
 				);

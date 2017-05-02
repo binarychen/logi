@@ -29,6 +29,13 @@ router.post('/create_order', function(req, res, next) {
 		db.create_order(
 				req.body.id,
 				req.body.name,
+				req.body.order_time,
+				req.body.receiver_name,
+				req.body.receiver_address,
+				req.body.receiver_address,
+				req.body.receiver_mobile,
+				req.body.shipper_id,
+				req.body.cargo_id,
 				req.body.enterprise_id,
 				req.body.driver_id,
 				req.body.truck_id,

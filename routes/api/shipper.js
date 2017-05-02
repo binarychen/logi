@@ -15,6 +15,7 @@ router.post('/create_shipper', function(req, res, next) {
 				req.body.id,
 				req.body.name,
 				req.body.china_id,
+				req.body.china_id_screen_url,
 				req.body.phone,
 				req.body.enterprise_uni_code,
 				Date.now(),

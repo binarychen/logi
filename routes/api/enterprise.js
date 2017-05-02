@@ -22,6 +22,8 @@ router.post('/create_enterprise', function(req, res, next) {
 				req.body.id,
 				req.body.name,
 				req.body.enterprise_uni_code,
+				req.body.business_license_code,
+				req.body.business_license_screen_url,
 				req.body.shipper_id,
 				req.body.op_range,
 				Date.now()

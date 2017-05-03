@@ -60,6 +60,7 @@ router.post('/create_order', function(req, res, next) {
 
 /* POST update a logistic order. */
 router.post('/update_order', function(req, res, next) {
+res.send("test update_order");
 	if(req.body){
 		console.log(req.body);
 		db.update_order(req.body.id, req.body.status);

@@ -194,11 +194,6 @@ var Model_truck_media = db.model("truck_media", Schema_truck_media);
 var Model_cargo_media = db.model("cargo_media", Schema_cargo_media);
 var Model_order_media = db.model("order_media", Schema_order_media);
 
-router.create_driver = function(vid, vname, vchina_id, vphone, vlicense,
-		venterprise_uni_code, vstatus, vchina_id_screen_url,
-		vlicense_screen_url, vreg_time, vlast_login) {
-	var adriver = new Model_dirver({
-
 var Schema_dirver = db.model("drvier", Schema_dirver);
 var Schema_shipper = db.model("shipper", Schema_shipper);
 var Schema_order = db.model("order", Schema_order);
@@ -210,6 +205,8 @@ router.create_driver = function(vid,
 		vlicense,
 		venterprise_uni_code,
 		vstatus,
+		vchina_id_screen_url,
+		vlicense_screen_url,
 		vreg_time,
 		vlast_login) {
 	var adriver = new Schema_dirver({
@@ -236,28 +233,10 @@ router.create_driver = function(vid,
 	});
 };
 
-router.create_shipper = function(vid, vname, vchina_id, vchina_id_screen_url,
-		vphone, venterprise_uni_code, vreg_time, vlast_login) {
-	var adriver = new Model_shipper({
-		license:vlicense,
-		enterprise_uni_code:venterprise_uni_code,
-		status: vstatus,
-		reg_time:vreg_time,
-		last_login : vlast_login//Date.now()
-	});
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
-	});
-};
-
 router.create_shipper = function(vid,
 		vname,
 		vchina_id,
+		vchina_id_screen_url,
 		vphone ,
 		venterprise_uni_code,
 		vreg_time,
@@ -432,7 +411,11 @@ router.create_truck_media = function(vid, vvid, vtype, vfile_name, vfile_url,
 	});
 };
 
-router.create_cargo_media = function(vid, vvid, vtype, vfile_name, vfile_url,
+router.create_cargo_media = function(vid, 
+		vvid, 
+		vtype, 
+		vfile_name, 
+		vfile_url,
 		vshow_order) {
 	var acargo_media = new Model_cargo_media({
 		id : vid,
@@ -448,14 +431,6 @@ router.create_cargo_media = function(vid, vvid, vtype, vfile_name, vfile_url,
 		} else {
 			console.log('success');
 		}
-		// db.close();
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
 	});
 };
 

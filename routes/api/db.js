@@ -14,7 +14,8 @@ var findDocuments;
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
-var db = mongoose.connect('mongodb://test2:testTest2@123.206.192.28:27017/logi');
+//var db = mongoose.connect('mongodb://test2:testTest2@123.206.192.28:27017/logi');
+var db = mongoose.connect('mongodb://123.206.192.28:27017/logi');
 var Schema = mongoose.Schema;
 
 db.connection.on("error", function(error) {
@@ -25,6 +26,7 @@ db.connection.once("open", function() {
 	console.log("数据库连接成功");
 });
 
+/*
 module.exports = {
 	user : {
 		name : {
@@ -37,8 +39,8 @@ module.exports = {
 		}
 	}
 };
-
-var Schema_dirver = new Schema({
+*/
+var Schema_driver = new Schema({
 	id : Number,
 	name : String,
 	china_id:String,
@@ -57,7 +59,7 @@ var Schema_dirver = new Schema({
 var Schema_shipper = new Schema({
 	id : Number,
 	name : String,
-	china_id : Number,
+	china_id : String,
 	phone : String,
 	enterprise_uni_code:String,
 	reg_time:Date,
@@ -183,7 +185,7 @@ var Schema_order_media = new Schema({
 	versionKey : false
 });
 
-var Model_dirver = db.model("drvier", Schema_dirver);
+var Model_driver = db.model("driver", Schema_driver);
 var Model_shipper = db.model("shipper", Schema_shipper);
 var Model_order = db.model("order", Schema_order);
 var Model_cargo = db.model("cargo", Schema_cargo);
@@ -194,9 +196,6 @@ var Model_truck_media = db.model("truck_media", Schema_truck_media);
 var Model_cargo_media = db.model("cargo_media", Schema_cargo_media);
 var Model_order_media = db.model("order_media", Schema_order_media);
 
-var Schema_dirver = db.model("drvier", Schema_dirver);
-var Schema_shipper = db.model("shipper", Schema_shipper);
-var Schema_order = db.model("order", Schema_order);
 
 router.create_driver = function(vid,
 		vname,
@@ -209,7 +208,7 @@ router.create_driver = function(vid,
 		vlicense_screen_url,
 		vreg_time,
 		vlast_login) {
-	var adriver = new Schema_dirver({
+	var adriver = new Model_driver({
 		id : vid,
 		name : vname,
 		china_id:vchina_id,
@@ -241,7 +240,7 @@ router.create_shipper = function(vid,
 		venterprise_uni_code,
 		vreg_time,
 		vlast_login) {
-	var adriver = new Schema_shipper({
+	var adriver = new Model_shipper({
 		id : vid,
 		name : vname,
 		china_id : vchina_id,
@@ -260,12 +259,32 @@ router.create_shipper = function(vid,
 	});
 };
 
-router.create_order = function(vid, vname, vorder_time, vreceiver_name,
-		vreceiver_address, vreceiver_mobile, vshipper_id, vcargo_id,
-		venterprise_id, vdriver_id, vtruck_id, vfrom_latitude, vfrom_longitude,
-		vto_latitude, vto_longitude, vstatus, vdesc, vgen_pic_url,
-		vaccept_order_pic_url, vdeliver_pic_url, varrived_pic_url,
-		vaccept_delivery_pic_url, vlast_op) {
+router.create_order = function(vid, 
+		vname, 
+		vorder_time, 
+		vreceiver_name,
+		vreceiver_address, 
+		vreceiver_mobile, 
+		vshipper_id, 
+		vcargo_id,
+		venterprise_id, 
+		vdriver_id, 
+		vtruck_id, 
+		vfrom_latitude, 
+		vfrom_longitude,
+		vto_latitude, 
+		vto_longitude, 
+		vstatus,
+		vdesc, 
+		vgen_pic_url,
+		vaccept_order_pic_url, 
+		vdeliver_pic_url, 
+		varrived_pic_url,
+		vaccept_delivery_pic_url, 
+		vlast_op) {
+	
+	console.log(vid);
+	
 	var adriver = new Model_order({
 		id : vid,
 		name : vname,
@@ -434,46 +453,8 @@ router.create_cargo_media = function(vid,
 	});
 };
 
-router.create_order = function(vid,
-		vname ,
-		venterprise_id,
-		vdriver_id,
-		vtruck_id,
-		vstatus,
-		vdesc,
-		vgen_pic_url,
-		vaccept_order_pic_url,
-		vdeliver_pic_url,
-		varrived_pic_url,
-		vaccept_delivery_pic_url,
-		vlast_op) {
-	var adriver = new Schema_order({
-		id : vid,
-		name : vname,
-		enterprise_id:venterprise_id,
-		driver_id:vdriver_id,
-		truck_id:vtruck_id,
-		status:vstatus,
-		desc:vdesc,
-		gen_pic_url:vgen_pic_url,
-		accept_order_pic_url:vaccept_order_pic_url,
-		deliver_pic_url:vdeliver_pic_url,
-		arrived_pic_url:varrived_pic_url,
-		accept_delivery_pic_url:vaccept_delivery_pic_url,
-		last_op : vlast_op
-	});
-	adriver.create(function(err) {
-		if(err){
-		    console.log(err);
-		  }else{
-		    console.log('success');
-		  }
-		//db.close();
-	});
-};
-
 router.update_driver = function(vid, vstatus) {
-	Schema_dirver.update({
+	Schema_driver.update({
 		id : vid
 	}, {
 		status : vstatus
@@ -488,7 +469,7 @@ router.update_driver = function(vid, vstatus) {
 };
 
 router.update_order = function(vid, vstatus) {
-	Schema_dirver.update({
+	Schema_driver.update({
 		id : vid
 	}, {
 		status : vstatus

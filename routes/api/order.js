@@ -26,12 +26,12 @@ router.post('/create_order', function(req, res, next) {
 		vaccept_delivery_pic_url,
 		vlast_op
 		 */
+		
 		db.create_order(
 				req.body.id,
 				req.body.name,
-				req.body.order_time,
+				Date.now(),
 				req.body.receiver_name,
-				req.body.receiver_address,
 				req.body.receiver_address,
 				req.body.receiver_mobile,
 				req.body.shipper_id,

@@ -14,7 +14,7 @@ router.get('/create_order', function(req, res, next) {
 
 
 //-------------------------------------------------------------
-/* POST create a logistic order. */
+/* POST create a logistic order. * /
 router.post('/create_order', function(req, res, next) {
 	if(req.body){
 		console.log(req.body);
@@ -24,19 +24,20 @@ router.post('/create_order', function(req, res, next) {
 	}
 });
 
-/* POST update a logistic order. */
+/* POST update a logistic order. * /
 router.post('/update_order', function(req, res, next) {
   res.send("test update_order");
 });
 
-/* POST query a logistic order. */
+/* POST query a logistic order. * /
 router.post('/query_order', function(req, res, next) {
   res.send("test query_order");
 });
 
-/* POST delete a logistic order. */
+/* POST delete a logistic order. * /
 router.post('/delete_order', function(req, res, next) {
   res.send("test delete_order");
 });
+*/
 
 module.exports = router;

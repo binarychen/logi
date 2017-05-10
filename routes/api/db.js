@@ -26,20 +26,6 @@ db.connection.once("open", function() {
 	console.log("数据库连接成功");
 });
 
-/*
-module.exports = {
-	user : {
-		name : {
-			type : String,
-			required : true
-		},
-		password : {
-			type : String,
-			required : true
-		}
-	}
-};
-*/
 var Schema_driver = new Schema({
 	id : Number,
 	name : String,
@@ -93,10 +79,25 @@ var Schema_order = new Schema({
 	enterprise_id : Number,
 	driver_id : Number,
 	truck_id : Number,
-	from_latitude : Number,
+	from_location : {
+		type: [Number],
+		index: {
+			type: '2dsphere',
+			sparse: true
+		}
+	},
+	to_location : {
+		type: [Number],
+		index: {
+			type: '2dsphere',
+			sparse: true
+		}
+	},
+	/*from_latitude : Number,
 	from_longitude : Number,
 	to_latitude : Number,
 	to_longitude : Number,
+	*/
 	status : Number, // 取消订单，已下单，已接单，已装车，已收货，完成订单
 	desc : String,
 	gen_pic_url : String,
@@ -143,8 +144,17 @@ var Schema_truck = new Schema({
 	type:Number,
 	eval_level:Number,
 	status:Number,
+	location : {
+		type: [Number],
+		index: {
+			type: '2dsphere',
+			sparse: true
+		}
+	},
+	/*
 	loc_longitude:Number,
 	loc_latitude:Number,
+	*/
 	desc:String,
 	desc_pic_url:String,
 	last_update: Date
@@ -297,10 +307,13 @@ router.create_order = function(vid,
 		enterprise_id : venterprise_id,
 		driver_id : vdriver_id,
 		truck_id : vtruck_id,
-		from_latitude : vfrom_latitude,
+		from_location : [vfrom_longitude, vfrom_latitude],
+		to_location : [vto_longitude, vto_latitude],
+		/*from_latitude : vfrom_latitude,
 		from_longitude : vfrom_longitude,
 		to_latitude : vto_latitude,
 		to_longitude : vto_longitude,
+		*/
 		status : vstatus,
 		desc : vdesc,
 		gen_pic_url : vgen_pic_url,
@@ -394,8 +407,11 @@ router.create_truck = function(vid, vvin, vlicense_plate, vvehicle_license,
 		eval_level : veval_level,
 		status : vstatus,
 		vehicle_thumb_url : vvehicle_thumb_url,
+		location : [vloc_longitude, vloc_latitude],
+		/*
 		loc_longitude : vloc_longitude,
 		loc_latitude : vloc_latitude,
+		*/
 		desc : vdesc,
 		desc_pic_url : vdesc_pic_url,
 		last_update : vlast_update
@@ -481,6 +497,49 @@ router.update_order = function(vid, vstatus) {
 		  }
 		//db.close();
 	});
+};
+
+router.get_nearest_trucks = function(longitude, latitude, distance){
+	console.log('search TRUCK: long='+longitude+' lat='+ latitude + ' dis='+distance);
+	Model_truck.find({
+		location : {
+			$near : {
+				$geometry : {
+					type : 'Point',
+					coordinates :  [ parseFloat(longitude), parseFloat(latitude) ]
+				},
+				$maxDistance: distance
+			}
+		}		
+	}).limit(10).skip(0).lean().exec(function(err, doc) {
+	    if (err) {
+	        console.log(err);
+	    }
+        //callback(doc);
+	    console.log(doc);
+    });
+};
+
+router.get_nearest_orders = function(longitude, latitude, distance){
+	console.log('search ORDER: long='+longitude+' lat='+ latitude + ' dis='+distance);
+	
+	Model_order.find({
+		from_location : {
+			$near : {
+				$geometry : {
+					type : 'Point',
+					coordinates :  [ parseFloat(longitude), parseFloat(latitude) ]
+				},
+				$maxDistance: distance
+			}
+		}		
+	}).limit(10).skip(0).lean().exec(function(err, doc) {
+	    if (err) {
+	        console.log(err);
+	    }
+        //callback(doc);
+	    console.log(doc);
+    });
 };
 
 /*

@@ -42,7 +42,13 @@ if(req.body){
 
 /* POST query a logistic driver. */
 router.post('/query_driver', function(req, res, next) {
-res.send("test query_driver");
+	res.send("test query_driver");
+});
+
+router.post('/nearest_drivers', function(req, res, next){
+	console.log(req.body);
+	res.send("test nearest_drivers, please call nearest_trucks");
+	//return db.get_nearest_drivers(req.body.log, req.body.lat, req.body.limit);
 });
 
 /* POST delete a logistic driver. */
@@ -50,4 +56,4 @@ router.post('/delete_driver', function(req, res, next) {
 res.send("test delete_driver");
 });
 
-module.exports = router;
+module.exports = router; 

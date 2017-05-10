@@ -75,9 +75,19 @@ router.post('/query_order', function(req, res, next) {
 res.send("test query_order");
 });
 
+
 /* POST delete a logistic order. */
 router.post('/delete_order', function(req, res, next) {
 res.send("test delete_order");
 });
+
+
+router.post('/nearest_orders', function(req, res, next){
+	console.log(req.body);
+	res.send("test nearest_orders");
+	return db.get_nearest_orders(req.body.long, req.body.lat, req.body.distance);
+});
+
+
 
 module.exports = router;

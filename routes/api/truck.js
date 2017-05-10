@@ -81,4 +81,11 @@ router.post('/delete_truck', function(req, res, next) {
 res.send("test delete_truck");
 });
 
+router.post('/nearest_trucks', function(req, res, next){
+	console.log(req.body);
+	res.send("test nearest_trucks");
+	return db.get_nearest_trucks(req.body.long, req.body.lat, req.body.distance);
+});
+
+
 module.exports = router;

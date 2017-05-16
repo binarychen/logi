@@ -5,6 +5,8 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db');
 
+var truck_id = 400000000;
+
 //-------------------------------------------------------------
 /* POST create a logistic truck. */
 router.post('/create_truck', function(req, res, next) {
@@ -32,7 +34,7 @@ router.post('/create_truck', function(req, res, next) {
 			desc_pic_url:String,
 			last_update: Date
 		 */
-		db.create_truck(9999999, req.body.vin, req.body.license_plate,
+		db.create_truck(truck_id, req.body.vin, req.body.license_plate,
 				req.body.vehicle_license, req.body.vehicle_license_screen_url,
 				req.body.name, req.body.driver_id, req.body.self_weight,
 				req.body.brand, req.body.bear_part_length,
@@ -41,7 +43,7 @@ router.post('/create_truck', function(req, res, next) {
 				req.body.vehicle_thumb_url, req.body.loc_longitude,
 				req.body.loc_latitude, req.body.desc, req.body.desc_pic_url,
 				Date.now());
-		global.latest_truck_id += 1;
+		truck_id = truck_id + 1;
 		console.log("test3");
 		res.send("success");
 	} else {
@@ -83,7 +85,7 @@ router.post('/nearest_trucks',
 //	PAGES
 //
 ////////////////////////////////////////////////////////////////////////////////////
-router.get('/truck_add', function(req, res, next) {
+router.get('/add', function(req, res, next) {
 	console.log(req.body);
 	res.render('truck_add', {
 		title : 'Add Truck',
@@ -91,7 +93,7 @@ router.get('/truck_add', function(req, res, next) {
 	});
 });
 
-router.get('/my_truck', function(req, res, next) {
+router.get('/my', function(req, res, next) {
 	console.log(req.body);
 	res.render('my_truck', {
 		title : 'My Truck',

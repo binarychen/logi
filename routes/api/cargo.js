@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db');
 
+var cargo_id = 500000000;
 
 //-------------------------------------------------------------
 /* POST create a logistic cargo. */
@@ -28,7 +29,7 @@ router.post('/create_cargo', function(req, res, next) {
 			last_op: Date
 		 */
 		db.create_cargo(
-				req.body.id,
+				cargo_id,
 				req.body.name,
 				req.body.enterprise_id,
 				req.body.enterprise_erp_id,
@@ -44,6 +45,7 @@ router.post('/create_cargo', function(req, res, next) {
 				Date.now()
 				);
 		res.send("success");
+		cargo_id = cargo_id + 1;
 	}else{
 		res.send("test create_cargo");
 	}
@@ -68,6 +70,28 @@ res.send("test query_cargo");
 /* POST delete a logistic cargo. */
 router.post('/delete_cargo', function(req, res, next) {
 res.send("test delete_cargo");
+});
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+//PAGES
+//
+////////////////////////////////////////////////////////////////////////////////////
+router.get('/add', function(req, res, next) {
+console.log(req.body);
+res.render('cargo_add', {
+title : 'Add cargo',
+message : "Hello"
+});
+});
+
+router.get('/my', function(req, res, next) {
+console.log(req.body);
+res.render('my_cargo', {
+title : 'My cargo',
+message : "Hello"
+});
 });
 
 module.exports = router;

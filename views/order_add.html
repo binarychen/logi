@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" media="screen">
+    <style type="text/css">
+    .m15{ margin: 15px;}
+     .tc{ text-align: center;font-size: 18px;font-weight: 600;}
+    </style>
+    <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
+</head>
+<body screen_capture_injected="true">
+    <div class="container">
+    <%- message %>
+        <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
+            <fieldset>
+                <legend></legend>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p class="tc">下单</p>
+                </div>
+                <div class="panel-body m15">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="订单的名字" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input type="text" class="form-control" id="receiver_name" name="receiver_name" placeholder="收件人姓名" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="receiver_address" name="receiver_address" placeholder="收件人地址" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="receiver_mobile" name="receiver_mobile" placeholder="收件人手机号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="shipper_id" name="shipper_id" placeholder="货主编号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="cargo_id" name="cargo_id" placeholder="货物编号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="enterprise_id" name="enterprise_id" placeholder="发货单位编号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="driver_id" name="driver_id" placeholder="司机编号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="truck_id" name="truck_id" placeholder="货车编号" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="from_latitude" name="from_latitude" placeholder="出发地经度" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="from_longitude" name="from_longitude" placeholder="出发地纬度" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="to_latitude" name="to_latitude" placeholder="目的地经度" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="to_longitude" name="to_longitude" placeholder="目的地纬度" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="status" name="status" placeholder="状态" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="desc" name="desc" placeholder="描述" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="gen_pic_url" name="gen_pic_url" placeholder="订单生成时照片" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="accept_order_pic_url" name="accept_order_pic_url" placeholder="订单接收照片" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="deliver_pic_url" name="deliver_pic_url" placeholder="投递中照片" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="arrived_pic_url" name="arrived_pic_url" placeholder="货物到达时图片" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input type="text" class="form-control" id="accept_delivery_pic_url" name="accept_delivery_pic_url" placeholder="货物接收时图片" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block" id="AddOrder0"> 添加 </button>
+                </div>
+                <div class="form-group">
+                        <button type="button" class="btn btn-info col-sm-2 col-sm-offset-10" id="QueryMine0">我的订单</button>
+                </div>
+                </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="../javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(function(){ 
+        $("#QueryMine0").click(function(){ 
+            location.href = '/order/my';
+        });
+        $("#AddOrder0").click(function(){ 
+            var name = $("#name").val();
+            var receiver_name = $("#receiver_name").val();
+            var receiver_address = $("#receiver_address").val();
+            var receiver_mobile = $("#receiver_mobile").val();
+            var shipper_id = $("#shipper_id").val();
+            var cargo_id = $("#cargo_id").val();
+            var enterprise_id = $("#enterprise_id").val();
+            var driver_id = $("#driver_id").val();
+            var truck_id = $("#truck_id").val();
+            var from_latitude = $("#from_latitude").val();
+            var from_longitude = $("#from_longitude").val();
+            var to_latitude = $("#to_latitude").val();
+            var to_longitude = $("#to_longitude").val();
+            var status = $("#status").val();
+            var desc = $("#desc").val();
+            var gen_pic_url = $("#gen_pic_url").val();
+            var accept_order_pic_url = $("#accept_order_pic_url").val();
+            var deliver_pic_url = $("#deliver_pic_url").val();
+            var arrived_pic_url = $("#arrived_pic_url").val();
+            var accept_delivery_pic_url = $("#accept_delivery_pic_url").val();
+            
+            var data = {
+            		"name":name,
+            		"receiver_name":receiver_name,
+            		"receiver_address":receiver_address,
+            		"receiver_mobile":receiver_mobile,
+            		"shipper_id":shipper_id,
+            		"cargo_id":cargo_id,
+            		"enterprise_id":enterprise_id,
+            		"driver_id":driver_id,
+            		"truck_id":truck_id,
+            		"from_latitude":from_latitude,
+            		"from_longitude":from_longitude,
+            		"to_latitude":to_latitude,
+            		"to_longitude":to_longitude,
+            		"status":status,            		
+            		"desc":desc,
+            		"gen_pic_url":gen_pic_url,
+            		"accept_order_pic_url":accept_order_pic_url,
+            		"deliver_pic_url":deliver_pic_url,
+            		"arrived_pic_url":arrived_pic_url,
+            		"accept_delivery_pic_url":accept_delivery_pic_url
+            	};
+            $.ajax({ 
+                url:'/order/create_order',
+                type:'post',
+                data: data,
+                success: function(data,status){ 
+                    if(status == 'success'){ 
+                        location.href = '/order/my';
+                    }
+                },
+                error: function(data,status){ 
+                    if(status == 'error'){ 
+                        location.href = '/order/add';
+                    }
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</head>
+</html>

@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db');
 
+var enterprise_id = 600000000;
 
 //-------------------------------------------------------------
 /* POST create a logistic enterprise. */
@@ -19,7 +20,7 @@ router.post('/create_enterprise', function(req, res, next) {
 			last_order : Date
 		 */
 		db.create_enterprise(
-				req.body.id,
+				enterprise_id,
 				req.body.name,
 				req.body.enterprise_uni_code,
 				req.body.business_license_code,
@@ -29,6 +30,7 @@ router.post('/create_enterprise', function(req, res, next) {
 				Date.now()
 				);
 		res.send("success");
+		enterprise_id = enterprise_id + 1;
 	}else{
 		res.send("test create_enterprise");
 	}
@@ -54,5 +56,29 @@ res.send("test query_enterprise");
 router.post('/delete_enterprise', function(req, res, next) {
 res.send("test delete_enterprise");
 });
+
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+//PAGES
+//
+////////////////////////////////////////////////////////////////////////////////////
+router.get('/add', function(req, res, next) {
+console.log(req.body);
+res.render('enterprise_add', {
+title : 'Add enterprise',
+message : "Hello"
+});
+});
+
+router.get('/my', function(req, res, next) {
+console.log(req.body);
+res.render('my_enterprise', {
+title : 'My enterprise',
+message : "Hello"
+});
+});
+
+
 
 module.exports = router;

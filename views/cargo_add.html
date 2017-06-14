@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />    
     <link rel="stylesheet" href="../stylesheets/bootstrap.min.css" media="screen">
     <style type="text/css">
     .m15{ margin: 15px;}
@@ -110,9 +111,14 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                         </span>
-                        <input type="text" class="form-control" id="gen_pic_url" name="gen_pic_url" placeholder="货物图片" required>
+                        <!-- input type="text" class="form-control" id="gen_pic_url" name="gen_pic_url" placeholder="货物图片" required-->
+                        
+                        <input id="gen_pic_url" type="file" name="files[]" data-url="server/php/" placeholder="货物图片" required multiple>
                     </div>
-                </div>                
+                </div>              
+                <div id="progress">
+				    <div class="bar" style="width: 0%;"></div>
+				</div>  
                 <div class="form-group">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -138,6 +144,33 @@
     <script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
     <script type="text/javascript">
     $(function(){ 
+    	
+    	$('#gen_pic_url').fileupload({
+            dataType: 'json',
+            add: function (e, data) {
+            	data.context = $('<button/>').text('Upload')
+                .appendTo(document.body)
+                .click(function () {
+                    $(this).replaceWith($('<p/>').text('Uploading...'));
+                    data.submit();
+                });
+            },
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('<p/>').text(file.name).appendTo(document.body);
+                });
+                data.context.text('Upload finished.');
+            }
+    	
+	    	progressall: function (e, data) {
+	            var progress = parseInt(data.loaded / data.total * 100, 10);
+	            $('#progress .bar').css(
+	                'width',
+	                progress + '%'
+	            );
+	        }
+        });
+    	
         $("#QueryMine0").click(function(){ 
             location.href = '/cargo/my';
         });

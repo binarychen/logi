@@ -4,6 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
+var produce = require('../mq/produce');
+
 
 var driver_id = 300000000;
 
@@ -18,7 +20,15 @@ router.post('/create_driver', function(req, res, next) {
 				req.body.license_screen_url, //v2.0
 				Date.now(), Date.now());
 		res.send("success");
+
+		//////////////////////
+		// Produce a message to all shippers
+		produce("new_driver", "driver_id", driver_id);
+
+		
 		driver_id = driver_id + 1;
+		
+
 	} else {
 		res.send("test create_driver");
 	}

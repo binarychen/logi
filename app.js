@@ -20,6 +20,9 @@ var order = require('./routes/api/order');
 var cargo = require('./routes/api/cargo');
 var enterprise = require('./routes/api/enterprise');
 var truck = require('./routes/api/truck');
+var consume = require('./routes/mq/consume');
+
+//////var upload = require('./routes/web/upload');
 
 var app = express();
 
@@ -59,6 +62,7 @@ app.use('/order', order);
 app.use('/cargo', cargo);
 app.use('/enterprise', enterprise);
 app.use('/truck', truck);
+//////app.use('/upload', upload);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

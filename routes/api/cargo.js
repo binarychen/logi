@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
-var produce = require('../mq/produce');
+var mqtt = require('../mq/mqtt_client');
 
 var cargo_id = 500000000;
 
@@ -38,8 +38,7 @@ router.post('/create_cargo', function(req, res, next) {
 
 		//////////////////////
 		// Produce a message to all drivers
-		console.log('produce msg of new_cargo!');
-		produce("new_cargo", "cargo_id", cargo_id);
+		mqtt.connect_pub("new_cargo", "cargo_id="+cargo_id);
 		
 		res.send("success");
 

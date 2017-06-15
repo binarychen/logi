@@ -18,7 +18,7 @@ var producer = KafkaProducer.create(vertx, config);
 
 
 //////////////////////////////////////
-
+producer.produce = function(){
 var KafkaProducerRecord = require("vertx-kafka-client-js/kafka_producer_record");
 
 for (var i = 0;i < 5;i++) {
@@ -36,6 +36,7 @@ for (var i = 0;i < 5;i++) {
 
   });
 }
+};
 
 
 ///////////////////////////////////////////////
@@ -47,3 +48,6 @@ producer.close(function (res, res_err) {
 	    console.log("close failed");
 	  }
 	});
+
+
+module.exports = producer;

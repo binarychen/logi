@@ -4,7 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
-var produce = require('../mq/produce');
+//var producer = require('../mq/produce');
+var mqtt = require('../mq/mqtt_client');
 
 
 var driver_id = 300000000;
@@ -22,9 +23,13 @@ router.post('/create_driver', function(req, res, next) {
 		res.send("success");
 
 		//////////////////////
-		// Produce a message to all shippers
-		produce("new_driver", "driver_id", driver_id);
-
+		/*/ Produce a message to all shippers
+		producer.create_topic('new_driver');
+		producer.produce("new_driver", "driver_id", driver_id, function(data){
+			console.log("log 28:" + data);
+		});
+		*/
+		mqtt.connect_pub("new_driver", "driver_id="+driver_id);
 		
 		driver_id = driver_id + 1;
 		

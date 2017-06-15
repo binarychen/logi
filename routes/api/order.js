@@ -4,6 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
+var mqtt = require('../mq/mqtt_client');
+
 
 var order_id = 100000000
 //-------------------------------------------------------------
@@ -37,6 +39,9 @@ router.post('/create_order', function(req, res, next) {
 				req.body.gen_pic_url, req.body.accept_order_pic_url,
 				req.body.deliver_pic_url, req.body.arrived_pic_url,
 				req.body.accept_delivery_pic_url, Date.now());
+		
+		mqtt.connect_pub("new_order", "order_id="+order_id);
+		
 		res.send("success");
 		order_id = order_id + 1;
 	} else {

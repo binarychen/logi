@@ -53,7 +53,8 @@ var consume = function(){
 			console.log(message);
 			try{
 				var msg = JSON.parse(message.value);
-				ServerRouter.dispatch(key, msg);
+				//ServerRouter.dispatch(key, msg);
+				
 			}catch(e){
 				console.log(e);
 			}

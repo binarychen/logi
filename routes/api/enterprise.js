@@ -4,6 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
+var mqtt = require('../mq/mqtt_client');
+
 
 var enterprise_id = 600000000;
 
@@ -29,6 +31,9 @@ router.post('/create_enterprise', function(req, res, next) {
 				req.body.op_range,
 				Date.now()
 				);
+		
+		mqtt.connect_pub("new_enterprise", "enterprise_id="+enterprise_id);
+		
 		res.send("success");
 		enterprise_id = enterprise_id + 1;
 	}else{

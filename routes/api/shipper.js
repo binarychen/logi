@@ -4,6 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
+var mqtt = require('../mq/mqtt_client');
+
 
 var shipper_id = 200000000;
 
@@ -21,6 +23,8 @@ router.post('/create_shipper', function(req, res, next) {
 				req.body.enterprise_uni_code, 
 				Date.now(), 
 				Date.now());
+		mqtt.connect_pub("new_shipper", "shipper_id="+shipper_id);
+		
 		res.send("success");
 		shipper_id = shipper_id + 1;
 	} else {

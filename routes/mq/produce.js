@@ -10,11 +10,20 @@ var client = new kafka.Client('111.231.10.132:12181');
 var producer = new Producer(client);
 console.log('producer connecting kafka.........');
 
-function produce(atopic, key, message, cb) {
-	console.log(4);
+producer.create_topic = function(topic){
+	producer.createTopics([topic,], false, function (err, data) {
+		console.log("create_topic: " + topic);
+		console.log(data);
+	});
+};
+
+producer.produce = function(atopic, key, message, cb) {
+	console.log(atopic);
+	console.log(key);
+	console.log(message);
 
 	var payloads = [ {
-		topic : atopic,
+		topic : "test", //atopic,
 		messages : new KeyedMessage(key, message)
 	} ];
 
@@ -26,11 +35,14 @@ function produce(atopic, key, message, cb) {
 		if (!err) {
 			console.log(err);
 		}
+		console.log("kafka data sent!");
 		console.log(data);
 		console.log(key + message);
-		cb(data);
+		if(cb !== undefined){
+			cb(data);
+		}
 	});
 
-}
+};
 
-module.exports = produce;
+module.exports = producer;

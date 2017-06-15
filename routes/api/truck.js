@@ -4,6 +4,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db');
+var mqtt = require('../mq/mqtt_client');
+
 
 var truck_id = 400000000;
 
@@ -43,6 +45,9 @@ router.post('/create_truck', function(req, res, next) {
 				req.body.vehicle_thumb_url, req.body.loc_longitude,
 				req.body.loc_latitude, req.body.desc, req.body.desc_pic_url,
 				Date.now());
+		
+		mqtt.connect_pub("new_truck", "truck_id="+truck_id);
+				
 		truck_id = truck_id + 1;
 		console.log("test3");
 		res.send("success");

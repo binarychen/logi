@@ -98,7 +98,9 @@ router.route("/shipper_register").get(function(req,res){// 到达此路径则渲
 	var chinaId=req.body.chinaId;
 	var phone=req.body.phone;
 	var enterpriseUniCode=req.body.enterpriseUniCode;
-    console.log("000000");
+	var regTime=new Date();
+    var loginTime=new Date();
+    console.log(chinaId+"-----"+phone+"-----"+"========="+enterpriseUniCode);
     Shipper.findOne({username: username},function(err,doc){   // 同理 /login 路径的处理方式
         console.log("1111");
 		if(err){
@@ -114,9 +116,11 @@ router.route("/shipper_register").get(function(req,res){// 到达此路径则渲
             Shipper.create({                             // 创建一组user对象置入model
                 username: username,
                 password: password,
-                chinaId:chinaId,
+                china_id:chinaId,
                 phone:phone,
-                enterpriseUniCode:enterpriseUniCode
+                enterprise_uni_code:enterpriseUniCode,
+                reg_time:regTime,
+                last_login : loginTime
             },function(err,doc){
                 if (err) {
                     res.send(500);

@@ -30,7 +30,7 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="姓名" lay-verify="required" required>
+                            <input type="text" class="required" id="username" name="username" placeholder="姓名">
                         </div>
                     </div>
                     <div class="form-group">
@@ -38,7 +38,7 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="密码" required>
+                            <input type="text" class="required" id="password" name="password" placeholder="密码" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -46,14 +46,14 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="password1" name="password1" placeholder="请再次输入密码" required>                        </div>
+                            <input type="password" class="required" id="password1" name="password1" placeholder="请再次输入密码" >                        </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="chinaId" name="chinaId" placeholder="身份证号" required>
+                            <input type="text" class="required" id="chinaId" name="chinaId" placeholder="身份证号">
                         </div>
                     </div>
                     <div class="form-group">
@@ -61,7 +61,7 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                         </span>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="手机号" required>
+                            <input type="text" class="required" id="phone" name="phone" placeholder="手机号" >
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,12 +69,13 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                         </span>
-                            <input type="text" class="form-control" id="enterpriseUniCode" name="enterpriseUniCode" placeholder="营业执照" required>
+                            <input type="text" class="required" id="enterpriseUniCode" name="enterpriseUniCode" placeholder="营业执照" >
                         </div>
                     </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block" id="register1">注册</button>
+                        <button type="reset" class="btn btn-primary btn-block" id="res">重置</button>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-primary btn-block" id="login1">登录</button>
@@ -87,8 +88,98 @@
 
 <script type="text/javascript" src="../javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
+<style type="text/css">
+    body { font:12px/19px Arial, Helvetica, sans-serif; color:#666;}
+    form div { margin:5px 0;}
+    .int label { float:left; width:100px; text-align:right;}
+    .int input { padding:1px 1px; border:1px solid #ccc;height:16px;}
+    .sub { padding-left:100px;}
+    .sub input { margin-right:10px; }
+    .formtips{width: 200px;margin:2px;padding:2px;}
+    .onError{
+        background:#FFE0E9 url(../img/reg3.gif) no-repeat 0 center;
+        padding-left:25px;
+    }
+    .onSuccess{
+        background:#E9FBEB url(../img/reg4.gif) no-repeat 0 center;
+        padding-left:25px;
+    }
+    .high{
+        color:red;
+    }
+</style>
 <script type="text/javascript">
     $(function(){
+        //如果是必填的，则加红星标识.
+        $("form :input.required").each(function(){
+            var $required = $("<strong class='high'> *</strong>"); //创建元素
+            $(this).parent().append($required); //然后将它追加到文档中
+        });
+        //文本框失去焦点后
+        $('form :input').blur(function(){
+            var $parent = $(this).parent();
+            $parent.find(".formtips").remove();
+            //验证用户名
+            if( $(this).is('#username') ){
+                if( this.value=="" || this.value.length < 6 ){
+                    var errorMsg = '请输入至少6位的用户名.';
+                    $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+                }else{
+                    var okMsg = '输入正确.';
+                    $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+                }
+            }
+            //验证密码
+            if( $(this).is('#password') ){
+                if( this.value=="" || ( this.value.length<6 ) ){
+                    var errorMsg = '密码不能少于6位数';
+                    $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+                }else{
+                    var okMsg = '输入正确.';
+                    $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+                }
+            }
+            if( $(this).is('#chinaId') ){
+                if( this.value=="" || this.value.length!=18 ){
+                    var errorMsg = '请输入18位身份证号码';
+                    $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+                }else{
+                    var okMsg = '输入正确.';
+                    $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+                }
+            }
+            if( $(this).is('#phone') ){
+                if( this.value=="" || this.value.length!=11 ){
+                    var errorMsg = '请输入正确的电话号码！';
+                    $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+                }else{
+                    var okMsg = '输入正确.';
+                    $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+                }
+            }
+            if( $(this).is('#enterpriseUniCode') ){
+                if( this.value==""){
+                    var errorMsg = '营业执照号不能为空';
+                    $parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+                }else{
+                    var okMsg = '输入正确.';
+                    $parent.append('<span class="formtips onSuccess">'+okMsg+'</span>');
+                }
+            }
+
+        }).keyup(function(){
+            $(this).triggerHandler("blur");
+        }).focus(function(){
+            $(this).triggerHandler("blur");
+        });//end blur
+
+
+
+
+        //重置
+        $('#res').click(function(){
+            $(".formtips").remove();
+        });
         $("#login1").click(function(){
             location.href = 'shipper_login';
         });
@@ -99,9 +190,33 @@
             var chinaId=$("#chinaId").val();
             var phone=$("#phone").val();
             var enterpriseUniCode=$("#enterpriseUniCode").val();
+            if(username.length<6||username==null){
+                 alert("用户名长度不能少于6");
+                 return;
+            }
+            if(password.length<6||password==null){
+                alert("密码长度不能少于6");
+                return;
+            }
+            if(chinaId.length!=18||chinaId==null){
+                $("#chinaId").css("border","1px solid red");
+                alert("身份证格式不正确");
+                return;
+            }
+            if(phone.length!=11||phone==null){
+                alert("请填写正确的电话号码格式");
+                return;
+            }
+            if(enterpriseUniCode.length==0){
+
+                alert("营业执照不能为空");
+                return;
+            }
             if(password !== password1){
                 $("#password").css("border","1px solid red");
                 $("#password1").css("border","1px solid red");
+                alert("确认密码和原密码不一致");
+                return;
             }else if(password === password1){
                 var data = {"username":username,
                             "password":password,
@@ -109,7 +224,6 @@
                             "phone":phone,
                             "enterpriseUniCode":enterpriseUniCode
                 };
-
                 $.ajax({
                     url: '/shipper/shipper_register',
                     type: 'post',
@@ -120,15 +234,14 @@
                         }
                     },
                     error: function(data,err){
-                        alert("注册失败");
                         location.href = 'shipper_register';
                     }
                 });
             }
         });
     });
-
 </script>
+
 </body>
 </head>
 </html>

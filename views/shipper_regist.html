@@ -30,7 +30,7 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="姓名" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="姓名" lay-verify="required" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -109,19 +109,18 @@
                             "phone":phone,
                             "enterpriseUniCode":enterpriseUniCode
                 };
-                alert(data.toString());
+
                 $.ajax({
                     url: '/shipper/shipper_register',
                     type: 'post',
                     data: data,
                     success: function(data,status){
                         if(status == 'success'){
-                            alert(data+"```````````````````");
                             location.href = 'shipper_login';
                         }
                     },
                     error: function(data,err){
-                        alert(data.username);
+                        alert("注册失败");
                         location.href = 'shipper_register';
                     }
                 });

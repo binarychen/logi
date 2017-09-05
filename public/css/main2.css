@@ -1,0 +1,433 @@
+html,
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			color: #333;
+			font-size: 12px;
+			font-family: DIN, "Microsoft YaHei", Arial, sans-serif;
+		}
+		
+		#jingzhi {
+			width: 61%;
+			height: 400px;
+			float: left;
+			margin-right: 1%;
+		}
+		
+		#xst1 {
+			display: none;
+			width: 70%;
+			height: 400px;
+			margin: 0 auto;
+			position: absolute;
+			top: 50px;
+			left: 15%;
+		}
+		
+		.header1 {
+			margin: 0 auto;
+			width: 70%;
+			height: 30px;
+			margin-top: 20px;
+			/*	border: 2px solid #DDDADB;*/
+		}
+		
+		.header1 .gupiao {
+			width: 100px;
+			float: left;
+			overflow: hidden;
+			height: 30px;
+			font-size: 16px;
+			border: 2px solid #DDDDDD;
+			background: #eee;
+			margin-right: 10px;
+		}
+		
+		.header1 .jingzhi {
+			width: 150px;
+			float: left;
+			overflow: hidden;
+			height: 30px;
+			font-size: 16px;
+			border: 2px solid #ddd;
+			background: #eee;
+		}
+		
+		.header1 .shijian {
+			width: 250px;
+			float: left;
+			overflow: hidden;
+			height: 30px;
+			font-size: 16px;
+			border: 2px solid #ddd;
+			background: #eee;
+		}
+		
+		.header1 .tabqie {
+			width: 100px;
+			float: right;
+			overflow: hidden;
+			height: 30px;
+			font-size: 16px;
+			background: #eee;
+			border: 2px solid #ddd;
+		}
+		
+		#img1 {
+			margin: 0 auto;
+			margin-left: 205px;
+		}
+		#goods{
+			background: #F7FAFF;
+			/*float: left;
+			width: 28%;
+			height: 390px;
+			*/
+		}
+		
+		.bootstrap-table {
+			width: 38%;
+	/*		height: 300px;*/
+			float: left;
+			margin: 0;
+		}
+		
+		.stock-info {
+			position: relative;
+			padding: 10px 20px;
+			background-color: #f7faff;
+			margin: 0 auto;
+			width: 100%;
+		}
+		
+		.stock-info .stock-bets h1 {
+			margin: 0;
+			max-width: 800px;
+		}
+		
+		h1 {
+			display: block;
+			font-size: 2em;
+			-webkit-margin-before: 0.67em;
+			-webkit-margin-after: 0.67em;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+			font-weight: bold;
+		}
+		
+		.stock-info .stock-bets h1 a {
+			color: #333;
+			margin-right: 15px;
+			font-size: 18px;
+		}
+		
+		a {
+			color: #707070;
+			text-decoration: none;
+		}
+		
+		a:-webkit-any-link {
+			color: -webkit-link;
+			cursor: auto;
+			text-decoration: underline;
+		}
+		
+		.stock-info .stock-bets .state {
+			color: #92a0ac;
+			font-size: 12px;
+			font-weight: 400;
+		}
+		
+		.s-down {
+			color: #1dbf60;
+		}
+		
+		
+		.stock-info .stock-bets .price strong {
+			font-size: 54px;
+			line-height: 56px;
+			margin-right: 20px;
+			
+		}
+		
+		strong,
+		b {
+			font-weight: bold;
+		}
+		
+		.s-down {
+			color: #1dbf60;
+		}
+		
+		.stock-info .stock-bets .price span {
+			font-size: 18px;
+			margin-right: 10px;
+			font-weight: 700;
+		}
+		
+		.stock-info .bets-content {
+			margin-top: 7px;
+			border-top: #e9edf0 solid 1px;
+			padding: 14px 0;
+		}
+		
+		.clear {
+			clear: both;
+		}
+		
+		.stock-info .bets-content .bets-col-10 dl {
+			width: 10%;
+		}
+		
+		.stock-info .bets-content dl {
+			float: left;
+			width: 9.09%;
+			line-height: 18px;
+		}
+		
+		dl,
+		dd {
+			margin: 0;
+		}
+		
+		dl {
+			display: block;
+			-webkit-margin-before: 1em;
+			-webkit-margin-after: 1em;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+		}
+		
+		.stock-info .bets-content dt {
+			color: #92a0ac;
+		}
+		
+		dt {
+			display: block;
+		}
+		
+		.stock-info .bets-content dd {
+			font-size: 14px;
+			font-weight: 700;
+		}
+		
+		dd {
+			display: block;
+			/*   -webkit-margin-start: 40px;*/
+		}
+		
+		.main-container {
+			margin: 0 auto;
+			width: 100%;
+			height: 400px;
+			margin-top: 10px;
+		}
+		
+		#goods th {
+			background: #CACACA;
+			text-align: center;
+		}
+		
+		#goods tr {
+			text-align: center;
+		}
+		
+		#goods tbody tr td:nth-child(2) {
+			color: #7994C8;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		
+		#goods tbody tr td:nth-child(3) {
+			color: #7994C8;
+			font-weight: bold;
+		}
+		
+		#goods tbody tr td:nth-child(5) {
+/*			color: green;*/
+			font-weight: bold;
+		}
+		
+		container tbody td .th-inner,
+		.fixed-table-container thead th .th-inner {
+			padding: 2px;
+		}
+		
+		.s-up {
+			color: red;
+		}
+		
+		a:-webkit-any-link {
+			text-decoration: none;
+		}
+		.btn-group{
+			float: right;
+			width: 80px;
+			height: 30px;
+			margin-right: 20px;
+		}
+		.zhangfu{
+		
+   float: left;
+    width: 17px;
+    height: 16px;
+    background: url(../img/arrow.png) no-repeat ;
+ display: none;
+		}
+
+		
+		
+			.zhangfu3{
+		
+ float: left;
+    width: 17px;
+    height: 16px;
+    background: url(../img/arrow.png) no-repeat 0px -76px ;
+   display: none;
+		} 
+.price{
+	position: relative;
+	top: 0;
+	left: 0;
+}
+.price .back1{
+	position: absolute;
+	top: 0;
+	left: 10px;	
+	opacity: 0.2;
+	width: 320px;
+	height: 52px;
+	z-index: 100;
+	display: none;
+}
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 950px) {
+	
+}
+
+.flip {
+ 	width: 20%;
+	height: 3em;
+	background: #6DB5D9;
+	margin: 0;
+	font-size: 18px;
+	line-height: 30px;
+	color: white;
+	font-weight: 900;
+	text-align: left;
+}
+
+.price-div {
+  font: 12px tahoma, Arial, Verdana, sans-serif;
+}
+
+.price-div > div,
+.total-price > div {
+  float: right;
+  text-align: center;
+}
+
+.price-icon {
+  background: #6DB5D9;
+  width: 25px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 26px;
+  font-weight: bold;
+  float: left;
+  margin-right: 2px;
+}
+
+.price-div .number {
+  background: #6DB5D9;
+  width: 30px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 38px;
+  font-weight: bold;
+  overflow: hidden;
+  margin-right: 1px;
+}
+
+.price-div .sign {
+	  background: #6DB5D9;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 48px;
+  height: 42px;
+}
+.price-div .danwei{
+	font-size:38px;
+	font-weight: 900;
+	line-height: 38px;
+	float: right;
+}
+
+.bootstrap-table{
+	width: 100%;
+	
+}
+#touzishouyi th{
+	    color: white;
+    background: #4FAFA1;
+    font-size: 14px;
+    
+}
+#hangye th{
+	 color: white;
+    background: #4FAFA1;
+    font-size: 14px;
+}
+#jiaoyi th{
+	 color: white;
+    background: #4FAFA1;
+    font-size: 14px;
+}
+#hangye td{
+	height: 26px;
+}
+#jiaoyi td{
+	height: 26px;
+}
+
+
+h2 {
+    background: #4FAFB1;
+   /* border-radius: 6px 6px 6px 6px;*/
+    color: white;
+    font-family: "Comic Sans MS","微软雅黑";
+    font-size: 18px;
+   /* margin: 15px 0px !important;*/
+     font-weight: 900;
+    padding: 5px 0px 5px 20px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+    height: 30px;
+}
+/*#dd1>.bootstrap-table{
+	height: 500px;
+}*/
+#dd>.bootstrap-table{
+	width: 60%;
+	float: left;
+}
+.biaoti{
+	    background: #4FAFB1;
+   /* border-radius: 6px 6px 6px 6px;*/
+    color: white;
+    font-family: "Comic Sans MS","微软雅黑";
+    font-size: 18px;
+   /* margin: 15px 0px !important;*/
+     font-weight: 900;
+    padding: 5px 0px 5px 20px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+    height: 30px;
+}

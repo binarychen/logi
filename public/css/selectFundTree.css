@@ -1,0 +1,39 @@
+/**
+ 下拉组合树控件
+ By wj
+*/
+
+@-webkit-keyframes menuContent-upbit{ /* 微微往上滑入 */
+  from {-webkit-transform: translate3d(0, 30px, 0); opacity: 0.3;}
+  to {-webkit-transform: translate3d(0, 0, 0);  opacity: 1;}
+}
+@keyframes menuContent-upbit{
+  from {transform: translate3d(0, 30px, 0);  opacity: 0.3;}
+  to {transform: translate3d(0, 0, 0);  opacity: 1;}
+}
+
+div.menuContent {
+	display:none;
+	position: absolute;
+	z-index:999;
+	/** anim **/
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	/** anim-upbit **/
+	-webkit-animation-name: menuContent-upbit;
+	animation-name: menuContent-upbit;
+	
+}
+
+ul.ztree {
+	margin-top: 10px;
+	border: 1px solid #d2d2d2;
+	background: #fff;
+	max-height:300px;
+	overflow-y:auto;
+	border-radius:2px;
+	box-shadow:0 2px 4px rgba(0,0,0,.12);
+	box-sizing:border-box
+}

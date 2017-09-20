@@ -65,6 +65,18 @@ router.post('/delete_driver', function(req, res, next) {
 	res.send("test delete_driver");
 });
 
+
+router.post('/near_cargos', function(req, res, next){
+	console.log(req.body);
+	if(!req.body.distance){
+		req.body.distance = 1000;
+	}
+	db.search_cargo(req.body.loc_longitude, req.body.loc_latitude, req.body.distance, function(data){
+		res.send(data);
+		console.log(data);
+	});
+});
+
 ////////////////////////////////////////////////////////////////////////////////////
 //
 //PAGES
@@ -85,5 +97,6 @@ router.get('/my', function(req, res, next) {
 		message : "Hello"
 	});
 });
+
 
 module.exports = router;

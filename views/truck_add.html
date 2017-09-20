@@ -194,7 +194,7 @@
     <script type="text/javascript">
     $(function(){ 
         $("#QueryMine0").click(function(){ 
-            location.href = '/truck/my_truck';
+            location.href = '/truck/my';
         });
         $("#AddTruck0").click(function(){ 
             var truckname = $("#truckname").val();
@@ -244,12 +244,12 @@
                 data: data,
                 success: function(data,status){ 
                     if(status == 'success'){ 
-                        location.href = '/truck/my_truck';
+                        location.href = '/truck/my';
                     }
                 },
                 error: function(data,status){ 
                     if(status == 'error'){ 
-                        location.href = '/truck/truck_add';
+                        location.href = '/truck/add';
                     }
                 }
             });

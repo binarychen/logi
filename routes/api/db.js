@@ -14,8 +14,8 @@ var findDocuments;
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
-//var db = mongoose.connect('mongodb://test2:testTest2@123.206.192.28:27017/logi');
-var db = mongoose.connect('mongodb://123.206.192.28:27017/logi');
+var db = mongoose.connect('mongodb://logi_web2:123456!weB@123.206.192.28:27017/logi');
+//var db = mongoose.connect('mongodb://123.206.192.28:27017/logi');
 var Schema = mongoose.Schema;
 
 db.connection.on("error", function(error) {
@@ -499,7 +499,7 @@ router.update_order = function(vid, vstatus) {
 	});
 };
 
-router.get_nearest_trucks = function(longitude, latitude, distance){
+router.get_nearest_trucks = function(longitude, latitude, distance, callback){
 	console.log('search TRUCK: long='+longitude+' lat='+ latitude + ' dis='+distance);
 	Model_truck.find({
 		location : {
@@ -515,9 +515,31 @@ router.get_nearest_trucks = function(longitude, latitude, distance){
 	    if (err) {
 	        console.log(err);
 	    }
-        //callback(doc);
+        callback(doc);
 	    console.log(doc);
     });
+};
+
+router.search_cargo=function(longitude, latitude, distance, next){
+	var stub_cargo_data = {
+			'src_longitude':longitude,
+			'src_latitude':latitude,
+			'req_distance':distance,
+			'result':[
+			        {'long':121.345,'lat':31.123,'name':'沪AUUUUU'},
+			        {'long':121.645,'lat':31.323,'name':'沪A5555U'},
+					{'long':121.945,'lat':31.523,'name':'沪A7777U'},
+					{'long':122.345,'lat':31.723,'name':'沪A9999U'},
+					{'long':122.645,'lat':31.923,'name':'沪AU1111'},
+					{'long':122.945,'lat':31.823,'name':'沪AU2222'},
+					{'long':123.345,'lat':31.623,'name':'沪AU3333'},
+					{'long':123.645,'lat':31.423,'name':'沪AU4444'},
+					{'long':123.945,'lat':31.223,'name':'沪AU5555'},
+					{'long':121.445,'lat':31.183,'name':'沪AU6666'},
+					{'long':121.745,'lat':31.143,'name':'沪AU8888'}
+				]
+	};
+	next(stub_cargo_data);
 };
 
 router.get_nearest_orders = function(longitude, latitude, distance){

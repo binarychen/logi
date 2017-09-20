@@ -44,7 +44,8 @@ var Schema_driver = new Schema({
 
 var Schema_shipper = new Schema({
 	id : Number,
-	name : String,
+	username:String,
+	password:String,
 	china_id : String,
 	phone : String,
 	enterprise_uni_code:String,
